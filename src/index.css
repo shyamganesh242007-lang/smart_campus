@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #13241b;
+    --bg-secondary: rgba(245, 243, 235, 0.75);
+    --bg-card: rgba(250, 248, 242, 0.85);
+    --bg-glass: rgba(255, 255, 255, 0.80);
+    --text-primary: #191E16;
+    --text-secondary: #565D50;
+    --olive-primary: #4C583E;
+    --olive-light: #687754;
+    --olive-hover: #3E4932;
+    --olive-dark: #2F3925;
+    --border-color: rgba(76, 88, 62, 0.18);
+    --divider-color: rgba(0, 0, 0, 0.08);
+    
+    /* Skeuomorphic Shadow & Specular Tokens */
+    --skeuo-specular: rgba(255, 255, 255, 0.85);
+    --skeuo-specular-soft: rgba(255, 255, 255, 0.45);
+    --skeuo-shade: rgba(20, 30, 18, 0.25);
+    --skeuo-shadow-raised: 0 12px 24px -6px rgba(10, 22, 14, 0.22), 0 4px 10px rgba(10, 22, 14, 0.12), inset 0 1px 1px var(--skeuo-specular), inset 0 -1px 1px rgba(0,0,0,0.06);
+    --skeuo-shadow-pressed: inset 0 3px 6px rgba(0, 0, 0, 0.22), inset 0 1px 2px rgba(0, 0, 0, 0.18), 0 1px 0 var(--skeuo-specular);
+    
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+  }
+
+  body {
+    @apply text-[var(--text-primary)] antialiased overflow-x-hidden;
+    background-color: var(--bg-main);
+    background-image: url('/campus-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* Skeuomorphic Raised Card */
+  .premium-card, .skeuo-card {
+    background: linear-gradient(175deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 241, 233, 0.88) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    border-right: 1px solid rgba(76, 88, 62, 0.15);
+    border-bottom: 1px solid rgba(76, 88, 62, 0.25);
+    box-shadow: 
+      0 14px 30px -4px rgba(10, 22, 14, 0.18),
+      0 6px 12px rgba(10, 22, 14, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .premium-card:hover, .skeuo-card:hover {
+    background: linear-gradient(175deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 244, 236, 0.92) 100%);
+    box-shadow: 
+      0 20px 40px -6px rgba(10, 22, 14, 0.24),
+      0 8px 16px rgba(10, 22, 14, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Skeuomorphic Glass Panel */
+  .glass-editorial, .skeuo-glass {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.88) 0%, rgba(240, 238, 229, 0.80) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255, 255, 255, 0.95);
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    border-right: 1px solid rgba(76, 88, 62, 0.18);
+    border-bottom: 1px solid rgba(76, 88, 62, 0.28);
+    box-shadow: 
+      0 8px 24px -2px rgba(10, 22, 14, 0.14),
+      0 2px 6px rgba(10, 22, 14, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Skeuomorphic Tactile Primary Button */
+  .btn-primary, .skeuo-btn-primary {
+    background: linear-gradient(180deg, #5c6a4b 0%, #434e36 60%, #37412c 100%);
+    color: #FFFFFF;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.45);
+    box-shadow: 
+      0 6px 16px rgba(25, 35, 20, 0.35),
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: 700;
+  }
+
+  .btn-primary:hover, .skeuo-btn-primary:hover {
+    background: linear-gradient(180deg, #677654 0%, #4d593f 60%, #3e4832 100%);
+    box-shadow: 
+      0 8px 20px rgba(25, 35, 20, 0.42),
+      0 3px 6px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.5),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active, .skeuo-btn-primary:active {
+    background: linear-gradient(180deg, #37412c 0%, #434e36 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      inset 0 3px 6px rgba(0, 0, 0, 0.35),
+      inset 0 1px 2px rgba(0, 0, 0, 0.25),
+      0 1px 2px rgba(0, 0, 0, 0.15);
+    transform: translateY(2px);
+  }
+
+  /* Skeuomorphic Secondary / Light Button */
+  .btn-secondary, .skeuo-btn-secondary {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F1EEE3 100%);
+    color: var(--olive-primary);
+    border-top: 1px solid rgba(255, 255, 255, 1);
+    border-left: 1px solid rgba(255, 255, 255, 0.8);
+    border-right: 1px solid rgba(76, 88, 62, 0.2);
+    border-bottom: 2px solid rgba(76, 88, 62, 0.3);
+    box-shadow: 
+      0 4px 10px rgba(10, 22, 14, 0.10),
+      0 1px 3px rgba(10, 22, 14, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 150ms ease;
+    font-weight: 700;
+  }
+
+  .btn-secondary:hover, .skeuo-btn-secondary:hover {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F6F4EB 100%);
+    box-shadow: 
+      0 6px 14px rgba(10, 22, 14, 0.15),
+      0 2px 4px rgba(10, 22, 14, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary:active, .skeuo-btn-secondary:active {
+    background: linear-gradient(180deg, #EBE7DC 0%, #F5F3EB 100%);
+    border-bottom: 1px solid rgba(76, 88, 62, 0.15);
+    box-shadow: 
+      inset 0 2px 5px rgba(0, 0, 0, 0.15),
+      0 1px 0 rgba(255, 255, 255, 0.8);
+    transform: translateY(1.5px);
+  }
+
+  /* Skeuomorphic Inset / Carved Surface (For Inputs, Search, Wells) */
+  .skeuo-inset, input, select, textarea {
+    box-shadow: 
+      inset 0 2px 5px rgba(0, 0, 0, 0.12),
+      inset 0 1px 2px rgba(0, 0, 0, 0.08),
+      0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  /* Skeuomorphic Tactile Badge / Pill */
+  .skeuo-badge {
+    background: linear-gradient(180deg, #FFFFFF 0%, #EDE9DD 100%);
+    border-top: 1px solid rgba(255, 255, 255, 1);
+    border-bottom: 1px solid rgba(76, 88, 62, 0.2);
+    box-shadow: 
+      0 2px 6px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Cursor Glow Effect */
+  .glow-effect::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(76, 88, 62, 0.06),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 250ms ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-effect:hover::before {
+    opacity: 1;
+  }
+
+  .glow-effect > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Background Animations */
+@keyframes floatDots {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
+}
+
+@keyframes waveDrift {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-2%) scaleY(1.05); }
+  100% { transform: translateX(-4%) scaleY(1); }
+}
+
+@keyframes orbitRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes floatMicro {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  50% { transform: translateY(-20px) rotate(10deg); opacity: 0.8; }
+  100% { transform: translateY(-40px) rotate(20deg); opacity: 0; }
+}
+
+.bg-layer-dots {
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  animation: floatDots 35s linear infinite;
+  opacity: 0.25;
+}
+
+.bg-layer-orbit {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orbit-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.05);
+  animation: orbitRotate 60s linear infinite;
+}
+
+/* Custom Tactile Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6c7b5a 0%, #434e36 100%);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7e8e6b 0%, #515e42 100%);
+}
+

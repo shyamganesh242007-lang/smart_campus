@@ -1,0 +1,30 @@
+[31msrc/components/CampusAI.jsx (2:9): "AI_PRESET_PROMPTS" is not exported by "src/data/mockData.js", imported by "src/components/CampusAI.jsx".[39m
+file: [36mC:/Users/rohit/OneDrive/Desktop/smart campus/src/components/CampusAI.jsx:2:9[39m
+[33m
+1: import React, { useState, useEffect, useRef } from 'react';
+2: import { AI_PRESET_PROMPTS } from '../data/mockData';
+            ^
+3: import { Bot, Send, Sparkles, User, MapPin, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+[39m
+1: import React, { useState, useEffect, useRef } from 'react';
+2: import { AI_PRESET_PROMPTS } from '../data/mockData';
+            ^
+3: import { Bot, Send, Sparkles, User, MapPin, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+[31msrc/components/CampusAI.jsx (2:9): "AI_PRESET_PROMPTS" is not exported by "src/data/mockData.js", imported by "src/components/CampusAI.jsx".[39m
+file: [36mC:/Users/rohit/OneDrive/Desktop/smart campus/src/components/CampusAI.jsx:2:9[39m
+[33m
+1: import React, { useState, useEffect, useRef } from 'react';
+2: import { AI_PRESET_PROMPTS } from '../data/mockData';
+            ^
+3: import { Bot, Send, Sparkles, User, MapPin, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+[39m
+    at getRollupError (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/parseAst.js:317:41)
+    at error (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/parseAst.js:313:42)
+    at Module.error (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:17154:16)
+    at Module.traceVariable (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:17587:29)
+    at ModuleScope.findVariable (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:15177:39)
+    at FunctionScope.findVariable (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:5397:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:5397:38)
+    at MemberExpression.bind (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:7116:49)
+    at CallExpression.bind (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:2546:23)
+    at CallExpression.bind (file:///C:/Users/rohit/OneDrive/Desktop/smart%20campus/node_modules/rollup/dist/es/shared/node-entry.js:12286:15)
