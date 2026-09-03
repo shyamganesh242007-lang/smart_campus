@@ -2,9 +2,10 @@ import React from 'react';
 import { 
   ShieldAlert, Activity, Users, Map, Building2, BellRing, 
   BarChart3, PieChart as PieChartIcon, TrendingUp, AlertOctagon, CheckCircle2, AlertTriangle,
-  TreePine, Maximize2, Eye, EyeOff, Flame, Navigation, Layers, Trophy, ArrowRight
+  TreePine, Maximize2, Eye, EyeOff, Flame, Navigation, Layers, Trophy, ArrowRight, Clock, CalendarDays
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { TIMETABLE_DATA } from '../data/mockData';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, 
   Tooltip, ResponsiveContainer, PieChart, Pie, Cell
@@ -237,7 +238,80 @@ export default function AdminDashboard({ onNavigateTab }) {
 
       </div>
 
-      {/* 4. Sub-Panels: CampusAI Insights + Digital Twin Controls */}
+      {/* 4. Live Class Timings & Attendance Tracker */}
+      <div className="premium-card p-6 md:p-8 rounded-3xl bg-[var(--bg-card)]">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-extrabold text-[var(--text-primary)] flex items-center gap-2">
+            <CalendarDays className="w-5 h-5 text-[var(--olive-primary)]" />
+            Live Class Timings & Attendance Tracker
+          </h3>
+          <span className="text-[10px] font-bold px-2 py-1 bg-[var(--olive-primary)]/10 text-[var(--olive-primary)] rounded-lg border border-[var(--olive-primary)]/20 uppercase tracking-wider">Today's Schedule</span>
+        </div>
+        
+        <div className="overflow-x-auto custom-scrollbar">
+          <table className="w-full text-left border-collapse min-w-[800px]">
+            <thead>
+              <tr className="border-b border-[var(--border-color)] text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest">
+                <th className="py-3 px-4">Timing</th>
+                <th className="py-3 px-4">Course Code & Subject</th>
+                <th className="py-3 px-4">Faculty</th>
+                <th className="py-3 px-4">Location</th>
+                <th className="py-3 px-4">Status</th>
+                <th className="py-3 px-4 text-right">Attendance</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--border-color)] text-xs font-bold">
+              {TIMETABLE_DATA.Today.map((slot, index) => {
+                // Mock attendance calculation for demo
+                const isBreak = slot.type === 'Break' || slot.type === 'Lunch';
+                const totalStudents = isBreak ? 0 : 64;
+                const presentStudents = isBreak ? 0 : Math.floor(totalStudents * (0.75 + Math.random() * 0.25));
+                const attPercent = isBreak ? 0 : Math.round((presentStudents / totalStudents) * 100);
+                
+                return (
+                  <tr key={index} className="hover:bg-[var(--bg-secondary)]/50 transition-colors">
+                    <td className="py-3 px-4 font-mono font-black text-[var(--text-primary)] whitespace-nowrap">
+                      {slot.time}
+                    </td>
+                    <td className="py-3 px-4">
+                      <p className="font-black text-[var(--text-primary)]">{slot.subject}</p>
+                      <p className="text-[10px] font-bold text-[var(--text-secondary)]">{slot.code}</p>
+                    </td>
+                    <td className="py-3 px-4 text-[var(--text-primary)]">{slot.faculty}</td>
+                    <td className="py-3 px-4">
+                      <p className="font-semibold text-[var(--text-primary)]">{slot.room}</p>
+                      <p className="text-[10px] text-[var(--text-secondary)]">{slot.block}</p>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className={`px-2 py-1 rounded-md text-[9px] font-black uppercase tracking-wider ${
+                        slot.status === 'Ongoing' ? 'bg-emerald-500 text-white animate-pulse' :
+                        slot.status === 'Completed' ? 'bg-slate-200 text-slate-600' :
+                        'bg-blue-500/10 text-blue-600'
+                      }`}>
+                        {slot.status}
+                      </span>
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      {!isBreak ? (
+                        <div className="flex flex-col items-end gap-1">
+                          <span className={`font-mono text-sm font-black ${attPercent >= 85 ? 'text-green-600' : attPercent >= 75 ? 'text-amber-500' : 'text-rose-500'}`}>
+                            {attPercent}%
+                          </span>
+                          <span className="text-[10px] font-bold text-[var(--text-secondary)]">{presentStudents} / {totalStudents} Present</span>
+                        </div>
+                      ) : (
+                        <span className="text-[10px] font-bold text-[var(--text-secondary)]">-</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 5. Sub-Panels: CampusAI Insights + Digital Twin Controls */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {/* CampusAI Console */}

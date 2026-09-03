@@ -1,26 +1,26 @@
 import React, { useState, useMemo } from 'react';
 import { useApp } from '../context/AppContext';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { 
-  Calendar, Download, Share2, AlertCircle, TrendingUp, TrendingDown, Target, 
+import {
+  Calendar, Download, Share2, AlertCircle, TrendingUp, TrendingDown, Target,
   Brain, Activity, ShieldAlert, Sparkles, CheckCircle, Calculator, Info,
   UserX, Clock, MapPin, CheckCircle2, UserCheck, AlertTriangle, Plus, X,
   CalendarCheck, MessageSquare, Send, BellRing, ChevronRight
 } from 'lucide-react';
 
 export default function AttendanceAnalytics() {
-  const { 
-    currentUser, 
-    attendance, 
-    STUDENT_PROFILE, 
-    disengagedStudents, 
-    mentorMeetings, 
-    scheduleMentorMeeting, 
-    cancelMentorMeeting 
+  const {
+    currentUser,
+    attendance,
+    STUDENT_PROFILE,
+    disengagedStudents,
+    mentorMeetings,
+    scheduleMentorMeeting,
+    cancelMentorMeeting
   } = useApp();
 
   const [filter, setFilter] = useState('Semester'); // 'Today' | 'This Week' | 'This Month' | 'Semester' | 'Overall'
-  
+
   // Mentor Scheduling Modal State
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [selectedStudentForMeeting, setSelectedStudentForMeeting] = useState(null);
@@ -29,7 +29,7 @@ export default function AttendanceAnalytics() {
     studentName: disengagedStudents[0]?.name || 'Karthik Raja S',
     section: disengagedStudents[0]?.section || 'CSE-A',
     attendance: disengagedStudents[0]?.attendance || 58.4,
-    mentorName: 'Dr. K. Arulmani (Prof / CSE)',
+    mentorName: 'Dr. Kumar (Prof / CSE)',
     date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
     time: '10:30 AM',
     venue: 'CSE HOD Cabin (Main Building MB-01, Floor 2)',
@@ -44,12 +44,12 @@ export default function AttendanceAnalytics() {
 
   // AI Calculators
   const [goalTarget, setGoalTarget] = useState(85);
-  
+
   const calculateGoal = () => {
     const totalClassesSoFar = currentData.total;
     const attendedSoFar = currentData.attended;
     const target = goalTarget / 100;
-    
+
     if (currentData.percentage >= goalTarget) return "You've already reached this goal!";
     const x = Math.ceil((target * totalClassesSoFar - attendedSoFar) / (1 - target));
     return `Attend the next ${x} consecutive classes to reach ${goalTarget}%.`;
@@ -64,7 +64,7 @@ export default function AttendanceAnalytics() {
         studentName: student.name,
         section: student.section,
         attendance: student.attendance,
-        mentorName: student.mentor || 'Dr. K. Arulmani (Prof / CSE)',
+        mentorName: student.mentor || 'Dr. Kumar (Prof / CSE)',
         agenda: `Attendance Shortage (${student.attendance}%) & Academic Remedial Recovery`
       }));
     } else {
@@ -78,7 +78,7 @@ export default function AttendanceAnalytics() {
           studentName: topDisengaged.name,
           section: topDisengaged.section,
           attendance: topDisengaged.attendance,
-          mentorName: topDisengaged.mentor || 'Dr. K. Arulmani (Prof / CSE)',
+          mentorName: topDisengaged.mentor || 'Dr. Kumar (Prof / CSE)',
           agenda: `Severe Attendance Shortage (${topDisengaged.attendance}%) & Remedial Action Plan`
         }));
       }
@@ -97,10 +97,10 @@ export default function AttendanceAnalytics() {
   };
 
   const handleExportCSV = () => {
-    const csvContent = "data:text/csv;charset=utf-8," 
+    const csvContent = "data:text/csv;charset=utf-8,"
       + "Subject,Code,Percentage,Attended,Total\n"
       + attendance.subjects.map(e => `${e.name},${e.code},${e.percentage}%,${e.attended},${e.total}`).join("\n");
-    
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -119,7 +119,7 @@ export default function AttendanceAnalytics() {
   let riskZone = "Safe Zone";
   let riskColor = "border-emerald-500";
   let rotation = "rotate-[45deg]"; // safe
-  
+
   if (riskPercentage < 75) {
     riskZone = "Critical Zone";
     riskColor = "border-rose-500";
@@ -132,7 +132,7 @@ export default function AttendanceAnalytics() {
 
   return (
     <div className="w-full min-h-[calc(100vh-4rem)] p-4 md:p-8 space-y-6 md:space-y-8 overflow-y-auto custom-scrollbar relative z-10 pb-32">
-      
+
       {/* Success Notification Banner */}
       {scheduleSuccessMsg && (
         <div className="p-4 bg-emerald-500 text-white rounded-2xl shadow-xl flex items-center justify-between animate-in slide-in-from-top duration-300">
@@ -168,7 +168,7 @@ export default function AttendanceAnalytics() {
 
         <div className="flex flex-col sm:flex-row gap-4 w-full xl:w-auto">
           {/* Quick Schedule Mentor Action */}
-          <button 
+          <button
             onClick={() => handleOpenScheduleModal(null)}
             className="flex items-center justify-center space-x-2 px-5 py-3 btn-primary rounded-2xl shadow-editorial text-xs font-extrabold uppercase tracking-wider hover:-translate-y-0.5 transition-all"
           >
@@ -239,13 +239,12 @@ export default function AttendanceAnalytics() {
           {disengagedStudents.map((student) => {
             const isCritical = student.attendance < 65;
             return (
-              <div 
+              <div
                 key={student.id}
-                className={`p-5 rounded-2xl border transition-all flex flex-col justify-between space-y-4 ${
-                  isCritical 
-                    ? 'bg-rose-50/50 border-rose-300 dark:bg-rose-950/20 dark:border-rose-800/50 shadow-sm' 
+                className={`p-5 rounded-2xl border transition-all flex flex-col justify-between space-y-4 ${isCritical
+                    ? 'bg-rose-50/50 border-rose-300 dark:bg-rose-950/20 dark:border-rose-800/50 shadow-sm'
                     : 'bg-amber-50/50 border-amber-300 dark:bg-amber-950/20 dark:border-amber-800/50'
-                }`}
+                  }`}
               >
                 <div>
                   <div className="flex items-start justify-between">
@@ -256,9 +255,8 @@ export default function AttendanceAnalytics() {
                         <p className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">{student.regNo} • {student.section}</p>
                       </div>
                     </div>
-                    <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
-                      isCritical ? 'bg-rose-500 text-white' : 'bg-amber-500 text-white'
-                    }`}>
+                    <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${isCritical ? 'bg-rose-500 text-white' : 'bg-amber-500 text-white'
+                      }`}>
                       {student.riskLevel}
                     </span>
                   </div>
@@ -285,7 +283,7 @@ export default function AttendanceAnalytics() {
                     <span className="font-bold text-[var(--text-secondary)]">Mentor:</span>
                     <span className="font-extrabold text-[var(--olive-primary)] truncate max-w-[140px]">{student.mentor}</span>
                   </div>
-                  
+
                   <button
                     onClick={() => handleOpenScheduleModal(student)}
                     className="w-full py-2.5 bg-[var(--olive-primary)] hover:bg-[var(--olive-hover)] text-white text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5"
@@ -311,7 +309,7 @@ export default function AttendanceAnalytics() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {mentorMeetings.map((meeting) => (
-              <div 
+              <div
                 key={meeting.id}
                 className="p-4 bg-white/60 rounded-2xl border border-[var(--border-color)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-white/90 transition-all shadow-sm"
               >
@@ -350,7 +348,7 @@ export default function AttendanceAnalytics() {
       {/* Filters */}
       <div className="flex items-center space-x-2 overflow-x-auto pb-2 custom-scrollbar">
         {['Today', 'This Week', 'This Month', 'Semester', 'Overall'].map(f => (
-          <button 
+          <button
             key={f}
             onClick={() => setFilter(f)}
             className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shadow-sm ${filter === f ? 'bg-[var(--olive-primary)] text-white' : 'glass-editorial text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]'}`}
@@ -361,10 +359,10 @@ export default function AttendanceAnalytics() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Column (Main Stats & Trend) */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* KPI Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <KPICard title="Attended" value={currentData.attended} subtext={`/ ${currentData.total} Classes`} icon={CheckCircle} color="text-emerald-500" />
@@ -375,7 +373,7 @@ export default function AttendanceAnalytics() {
 
           {/* Trend Chart & Distribution */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
+
             {/* Area Chart */}
             <div className="md:col-span-2 premium-card glow-effect p-6 rounded-3xl border border-[var(--border-color)] shadow-sm flex flex-col">
               <div className="flex justify-between items-center mb-6">
@@ -386,19 +384,19 @@ export default function AttendanceAnalytics() {
                   <AreaChart data={attendance.trend} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorAtt" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="var(--olive-primary)" stopOpacity={0.4}/>
-                        <stop offset="95%" stopColor="var(--olive-primary)" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="var(--olive-primary)" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="var(--olive-primary)" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="colorPred" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.4}/>
-                        <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'var(--text-secondary)' }} dy={10} />
                     <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'var(--text-secondary)' }} domain={['dataMin - 5', 'dataMax + 5']} />
-                    <Tooltip 
-                      contentStyle={{ borderRadius: '16px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-card)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }} 
-                      itemStyle={{ fontWeight: 'bold' }} 
+                    <Tooltip
+                      contentStyle={{ borderRadius: '16px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-card)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+                      itemStyle={{ fontWeight: 'bold' }}
                     />
                     <Area type="monotone" dataKey="attendance" stroke="var(--olive-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorAtt)" activeDot={{ r: 6 }} />
                     <Area type="monotone" dataKey="predicted" stroke="#8b5cf6" strokeWidth={3} strokeDasharray="5 5" fillOpacity={1} fill="url(#colorPred)" />
@@ -429,7 +427,7 @@ export default function AttendanceAnalytics() {
               </div>
               {/* Legend */}
               <div className="mt-4 space-y-2">
-                {attendance.distribution.slice(0,3).map(item => (
+                {attendance.distribution.slice(0, 3).map(item => (
                   <div key={item.name} className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></div>
@@ -440,7 +438,7 @@ export default function AttendanceAnalytics() {
                 ))}
               </div>
             </div>
-            
+
           </div>
 
           {/* Subject Wise Progress */}
@@ -462,7 +460,7 @@ export default function AttendanceAnalytics() {
                     </div>
                   </div>
                   <div className="w-full bg-[var(--bg-secondary)] h-2.5 rounded-full overflow-hidden">
-                    <div 
+                    <div
                       className="h-full rounded-full transition-all duration-1000 ease-out"
                       style={{ width: `${subject.percentage}%`, backgroundColor: subject.color }}
                     ></div>
@@ -475,7 +473,7 @@ export default function AttendanceAnalytics() {
 
         {/* Right Column (AI & Insights) */}
         <div className="space-y-6">
-          
+
           {/* Low Attendance Alert */}
           {attendance.subjects.some(s => s.percentage < 75) && (
             <div className="bg-rose-50 border border-rose-200 p-5 rounded-3xl flex items-start space-x-3 shadow-sm animate-pulse">
@@ -498,7 +496,7 @@ export default function AttendanceAnalytics() {
               <Sparkles className="w-4 h-4 text-[var(--olive-primary)]" />
               <span>CampusAI Insights</span>
             </h3>
-            
+
             <div className="space-y-3 relative z-10">
               <div className="bg-[#FFFFFF]/50 backdrop-blur-sm p-4 rounded-2xl border border-[var(--border-color)] hover:-translate-y-0.5 transition-transform">
                 <p className="text-xs font-semibold text-[var(--text-primary)] leading-relaxed">
@@ -528,10 +526,10 @@ export default function AttendanceAnalytics() {
               <div>
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest block mb-2">Target Attendance %</label>
                 <div className="flex items-center space-x-4">
-                  <input 
-                    type="range" 
-                    min="75" max="100" 
-                    value={goalTarget} 
+                  <input
+                    type="range"
+                    min="75" max="100"
+                    value={goalTarget}
                     onChange={(e) => setGoalTarget(e.target.value)}
                     className="w-full h-2 bg-[var(--bg-secondary)] rounded-lg appearance-none cursor-pointer accent-[var(--olive-primary)]"
                   />
@@ -550,12 +548,12 @@ export default function AttendanceAnalytics() {
           <div className="premium-card glow-effect p-6 rounded-3xl border border-[var(--border-color)] shadow-sm">
             <h3 className="font-extrabold text-[var(--text-primary)] uppercase tracking-widest text-sm mb-4">Monthly Heatmap</h3>
             <div className="grid grid-cols-7 gap-1.5">
-              {['S','M','T','W','T','F','S'].map(day => (
+              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
                 <div key={day} className="text-[10px] font-bold text-center text-[var(--text-secondary)] mb-1">{day}</div>
               ))}
               {attendance.calendar.map((day, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="aspect-square rounded-md transition-all hover:scale-110 cursor-help"
                   style={{ backgroundColor: day.color }}
                   title={`${day.date} August: ${day.status.toUpperCase()}`}
@@ -578,7 +576,7 @@ export default function AttendanceAnalytics() {
       {showScheduleModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="premium-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] max-w-xl w-full shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
-            
+
             <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-4">
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-rose-500/10 text-rose-600 rounded-xl">
@@ -589,7 +587,7 @@ export default function AttendanceAnalytics() {
                   <p className="text-xs text-[var(--text-secondary)] font-semibold">Academic Attendance & Counseling Protocol</p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setShowScheduleModal(false)}
                 className="p-2 hover:bg-[var(--bg-secondary)] text-[var(--text-secondary)] rounded-xl transition-colors"
               >
@@ -598,7 +596,7 @@ export default function AttendanceAnalytics() {
             </div>
 
             <form onSubmit={handleConfirmSchedule} className="space-y-4">
-              
+
               {/* Student Picker */}
               <div className="space-y-1.5">
                 <label className="text-xs font-extrabold text-[var(--text-primary)] uppercase tracking-wider">
@@ -637,10 +635,10 @@ export default function AttendanceAnalytics() {
                 </label>
                 <select
                   value={mentorMeetingForm.mentorName}
-                  onChange={(e) => setMentorMeetingForm({...mentorMeetingForm, mentorName: e.target.value})}
+                  onChange={(e) => setMentorMeetingForm({ ...mentorMeetingForm, mentorName: e.target.value })}
                   className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3 text-sm font-bold text-[var(--text-primary)] focus:outline-none focus:border-[var(--olive-primary)]"
                 >
-                  <option value="Dr. K. Arulmani (Prof / CSE)">Dr. K. Arulmani (Prof / Senior Faculty Counselor)</option>
+                  <option value="Dr. Kumar (Prof / CSE)">Dr. Kumar (Prof / Senior Faculty Counselor)</option>
                   <option value="Dr. S. Kanthimathi (HOD / CSE)">Dr. S. Kanthimathi (Head of Department / CSE)</option>
                   <option value="Prof. P. Ramesh (Asst. Prof / CSE)">Prof. P. Ramesh (Academic Class Advisor)</option>
                   <option value="Dr. M. Suresh (Dean Academics)">Dr. M. Suresh (Dean of Student Affairs)</option>
@@ -657,7 +655,7 @@ export default function AttendanceAnalytics() {
                     type="date"
                     required
                     value={mentorMeetingForm.date}
-                    onChange={(e) => setMentorMeetingForm({...mentorMeetingForm, date: e.target.value})}
+                    onChange={(e) => setMentorMeetingForm({ ...mentorMeetingForm, date: e.target.value })}
                     className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3 text-sm font-bold text-[var(--text-primary)] focus:outline-none focus:border-[var(--olive-primary)]"
                   />
                 </div>
@@ -667,7 +665,7 @@ export default function AttendanceAnalytics() {
                   </label>
                   <select
                     value={mentorMeetingForm.time}
-                    onChange={(e) => setMentorMeetingForm({...mentorMeetingForm, time: e.target.value})}
+                    onChange={(e) => setMentorMeetingForm({ ...mentorMeetingForm, time: e.target.value })}
                     className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3 text-sm font-bold text-[var(--text-primary)] focus:outline-none focus:border-[var(--olive-primary)]"
                   >
                     <option value="09:30 AM">09:30 AM (Before 1st Lecture)</option>
@@ -686,7 +684,7 @@ export default function AttendanceAnalytics() {
                 </label>
                 <select
                   value={mentorMeetingForm.venue}
-                  onChange={(e) => setMentorMeetingForm({...mentorMeetingForm, venue: e.target.value})}
+                  onChange={(e) => setMentorMeetingForm({ ...mentorMeetingForm, venue: e.target.value })}
                   className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3 text-sm font-bold text-[var(--text-primary)] focus:outline-none focus:border-[var(--olive-primary)]"
                 >
                   <option value="CSE HOD Cabin (Main Building MB-01, Floor 2)">CSE HOD Cabin (Main Building MB-01, Floor 2)</option>
@@ -705,7 +703,7 @@ export default function AttendanceAnalytics() {
                   rows={3}
                   required
                   value={mentorMeetingForm.agenda}
-                  onChange={(e) => setMentorMeetingForm({...mentorMeetingForm, agenda: e.target.value})}
+                  onChange={(e) => setMentorMeetingForm({ ...mentorMeetingForm, agenda: e.target.value })}
                   placeholder="Enter specific recovery requirements, lab attendance catchups, etc."
                   className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3 text-xs font-semibold text-[var(--text-primary)] focus:outline-none focus:border-[var(--olive-primary)] custom-scrollbar"
                 />
@@ -739,7 +737,7 @@ export default function AttendanceAnalytics() {
           </div>
         </div>
       )}
-      
+
     </div>
   );
 }

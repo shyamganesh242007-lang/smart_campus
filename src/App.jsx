@@ -4,6 +4,7 @@ import CampusAI from './components/CampusAI';
 import Dashboard from './components/Dashboard';
 import AdminDashboard from './components/AdminDashboard';
 import StaffDashboard from './components/StaffDashboard';
+import StaffDetails from './components/StaffDetails';
 import Timetable from './components/Timetable';
 import AttendanceAnalytics from './components/AttendanceAnalytics';
 import ExamSeatFinder from './components/ExamSeatFinder';
@@ -14,6 +15,7 @@ import EmergencySOS from './components/EmergencySOS';
 import ContestWalkthrough from './components/ContestWalkthrough';
 import AnimatedBackground from './components/AnimatedBackground';
 import Login from './components/Login';
+import StudyGenAI from './pages/StudyGenAI';
 import { useApp } from './context/AppContext';
 
 import {
@@ -34,7 +36,8 @@ import {
   ChevronDown,
   MapPin,
   CalendarDays,
-  BookOpen
+  BookOpen,
+  Users
 } from 'lucide-react';
 
 export default function App() {
@@ -152,6 +155,7 @@ export default function App() {
       return [
         { id: 'admin_dash', label: 'Admin Console', icon: LayoutDashboard },
         { id: '3d', label: '3D Campus', icon: Compass },
+        { id: 'staff_details', label: 'Staff', icon: Users },
         { id: 'events', label: 'Events Hub', icon: Award },
         { id: 'notices', label: 'Notices', icon: Bell }
       ];
@@ -159,6 +163,7 @@ export default function App() {
       return [
         { id: 'staff_dash', label: 'Faculty Portal', icon: LayoutDashboard },
         { id: '3d', label: '3D Campus', icon: Compass },
+        { id: 'studygen', label: 'StudyGen AI', icon: BookOpen },
         { id: 'timetable', label: 'Timetable', icon: Calendar },
         { id: 'events', label: 'Events Hub', icon: Award },
         { id: 'notices', label: 'Notices', icon: Bell }
@@ -168,6 +173,7 @@ export default function App() {
         { id: '3d', label: '3D Campus', icon: Compass },
         { id: 'ai', label: 'CampusAI', icon: Bot, highlight: true },
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { id: 'studygen', label: 'StudyGen AI', icon: BookOpen },
         { id: 'timetable', label: 'Timetable', icon: Calendar },
         { id: 'attendance', label: 'Attendance Calc', icon: Calculator },
         { id: 'exam', label: 'Exam Seat', icon: GraduationCap },
@@ -428,6 +434,12 @@ export default function App() {
           </div>
         )}
 
+        {activeTab === 'staff_details' && (
+          <div className="py-6">
+            <StaffDetails />
+          </div>
+        )}
+
         {activeTab === 'timetable' && (
           <div className="py-6">
             <Timetable onTriggerRoute={handleTriggerRoute} />
@@ -455,6 +467,12 @@ export default function App() {
         {activeTab === 'notices' && (
           <div className="py-6">
             <NoticeBoard onAskAI={handleAskAI} />
+          </div>
+        )}
+
+        {activeTab === 'studygen' && (
+          <div className="py-6">
+            <StudyGenAI />
           </div>
         )}
       </main>

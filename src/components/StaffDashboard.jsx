@@ -21,7 +21,7 @@ export default function StaffDashboard() {
     scheduleMentorMeeting
   } = useApp();
 
-  const [selectedSubject, setSelectedSubject] = useState('CS8591');
+  const [selectedSubject, setSelectedSubject] = useState('Hackathon');
   const [selectedSection, setSelectedSection] = useState('CSE-A');
   
   // Roster state per section
@@ -32,7 +32,7 @@ export default function StaffDashboard() {
   const [typedAbsentRolls, setTypedAbsentRolls] = useState("45, 89, 95");
   
   // Active absent set derived from state
-  const [absentRollsSet, setAbsentRollsSet] = useState(new Set(["45", "89", "95"]));
+  const [absentRollsSet, setAbsentRollsSet] = useState(new Set(["42112410645", "42112410689", "42112410695"]));
 
   const [noticeTitle, setNoticeTitle] = useState('');
   const [noticeContent, setNoticeContent] = useState('');
@@ -46,20 +46,20 @@ export default function StaffDashboard() {
     const newSet = new Set();
     currentStudents.forEach(s => {
       if (rolls.some(r => s.roll === r || s.roll.endsWith(r) || s.regNo.endsWith(r))) {
-        newSet.add(s.roll);
+        newSet.add(s.regNo);
       }
     });
     setAbsentRollsSet(newSet);
   };
 
   // Toggle individual student chip
-  const toggleStudentStatus = (roll) => {
+  const toggleStudentStatus = (regNo) => {
     setAbsentRollsSet(prev => {
       const next = new Set(prev);
-      if (next.has(roll)) {
-        next.delete(roll);
+      if (next.has(regNo)) {
+        next.delete(regNo);
       } else {
-        next.add(roll);
+        next.add(regNo);
       }
       // Update text input to reflect
       setTypedAbsentRolls(Array.from(next).join(', '));
@@ -86,7 +86,7 @@ export default function StaffDashboard() {
       ...prev,
       [selectedSection]: prev[selectedSection].map(s => ({
         ...s,
-        status: absentRollsSet.has(s.roll) ? 'absent' : 'present'
+        status: absentRollsSet.has(s.regNo) ? 'absent' : 'present'
       }))
     }));
 
@@ -124,7 +124,7 @@ export default function StaffDashboard() {
       title: noticeTitle,
       category: 'Academic',
       date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
-      author: currentUser?.name || 'Prof. K. Arulmani (CSE)',
+      author: currentUser?.name || 'Prof. Kumar',
       summary: noticeContent.substring(0, 60) + '...',
       content: noticeContent
     });
@@ -138,7 +138,7 @@ export default function StaffDashboard() {
       studentName: student.name,
       section: selectedSection,
       attendance: student.attendance,
-      mentorName: 'Prof. K. Arulmani (Senior Counselor)',
+      mentorName: 'Prof. Kumar',
       date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
       time: '03:30 PM',
       venue: 'Faculty Advisory Cabin 14 (Kalam Block AKB-02)',
@@ -163,7 +163,7 @@ export default function StaffDashboard() {
           </div>
 
           <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)]">
-            Faculty Portal — <span className="text-[var(--olive-primary)]">{currentUser?.name || 'Prof. K. Arulmani'}</span>
+            Faculty Portal — <span className="text-[var(--olive-primary)]">{currentUser?.name || 'Prof. Kumar'}</span>
           </h1>
           <p className="text-xs md:text-sm text-[var(--text-secondary)] font-semibold max-w-xl">
             Welcome to your smart teaching console. Log section roll attendance, track low attendance students, and broadcast smart notices.
@@ -251,6 +251,7 @@ export default function StaffDashboard() {
                   value={selectedSubject}
                   onChange={e => setSelectedSubject(e.target.value)}
                 >
+                  <option value="Hackathon">Hackathon</option>
                   <option value="CS8591">Computer Networks (CS8591)</option>
                   <option value="AI8301">Artificial Intelligence & Deep Learning (AI8301)</option>
                   <option value="CS8501">Theory of Computation (CS8501)</option>
@@ -266,7 +267,7 @@ export default function StaffDashboard() {
                   onChange={e => {
                     const sec = e.target.value;
                     setSelectedSection(sec);
-                    const initAbs = sec === 'CSE-A' ? ['45', '89', '95'] : sec === 'CSE-B' ? ['49'] : ['44'];
+                    const initAbs = sec === 'CSE-A' ? ['42112410645', '42112410689', '42112410695'] : sec === 'CSE-B' ? ['42112410749'] : ['42112410794'];
                     setAbsentRollsSet(new Set(initAbs));
                     setTypedAbsentRolls(initAbs.join(', '));
                   }}
@@ -306,7 +307,7 @@ export default function StaffDashboard() {
                 ) : (
                   Array.from(absentRollsSet).map(r => (
                     <span key={r} className="px-2.5 py-1 bg-rose-500 text-white rounded-lg text-xs font-mono font-black flex items-center gap-1 shadow-sm">
-                      Roll {r}
+                      {r}
                       <button onClick={() => toggleStudentStatus(r)} className="hover:opacity-80">
                         <X className="w-3 h-3" />
                       </button>
@@ -327,26 +328,26 @@ export default function StaffDashboard() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-64 overflow-y-auto custom-scrollbar p-1">
                 {currentStudents.map(student => {
-                  const isAbsent = absentRollsSet.has(student.roll);
+                  const isAbsent = absentRollsSet.has(student.regNo);
                   const isLow = student.attendance < 75;
                   return (
                     <button
                       key={student.roll}
                       type="button"
-                      onClick={() => toggleStudentStatus(student.roll)}
+                      onClick={() => toggleStudentStatus(student.regNo)}
                       className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between space-y-1.5 hover:-translate-y-0.5 ${
                         isAbsent 
                           ? 'bg-rose-500 text-white border-rose-600 shadow-md' 
                           : 'bg-white border-[var(--border-color)] hover:bg-emerald-50 text-[var(--text-primary)]'
                       }`}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className={`font-mono text-xs font-black px-1.5 py-0.5 rounded ${
+                      <div className="flex items-center justify-between gap-1">
+                        <span className={`font-mono text-[9px] font-black px-1.5 py-0.5 rounded truncate ${
                           isAbsent ? 'bg-rose-700 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-primary)]'
                         }`}>
-                          #{student.roll}
+                          {student.regNo}
                         </span>
-                        <span className={`text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded ${
+                        <span className={`text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded shrink-0 ${
                           isAbsent ? 'bg-white text-rose-600' : isLow ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
                         }`}>
                           {isAbsent ? 'ABSENT' : `${student.attendance}%`}

@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
       onLogin({
         id: registerNumber.trim(),
         role: activeRole,
-        name: activeRole === 'admin' ? 'Campus Admin' : activeRole === 'staff' ? 'Prof. K. Arulmani' : 'Ragul',
+        name: activeRole === 'admin' ? 'Campus Admin' : activeRole === 'staff' ? 'Prof. Kumar' : 'Ragul',
         department: activeRole === 'admin' ? 'Administration' : 'Computer Science & Engineering'
       });
     }

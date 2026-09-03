@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+langchain
+langchain-google-genai
+langchain-chroma
+chromadb
+pypdf
+python-multipart
+python-docx
+python-pptx
+Pillow
+easyocr
+python-dotenv
+google-genai
+sentence-transformers
+langchain-community

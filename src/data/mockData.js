@@ -14,7 +14,7 @@ export const STUDENT_PROFILE = {
   attendedClasses: 169,
   totalClasses: 200,
   rank: "3rd in Department",
-  adviser: "Dr. K. Arulmani (Prof / CSE)",
+  adviser: "Dr. Kumar (Prof / CSE)",
   skills: ["AI/ML", "React", "Python", "Data Structures", "Cybersecurity"]
 };
 
@@ -185,7 +185,7 @@ export const TIMETABLE_DATA = {
     { time: "09:00 AM - 10:40 AM", code: "CS8511", subject: "Web Technology Lab", faculty: "Prof. K. Rajan", room: "Web Lab 2", block: "Main Building", type: "Lab" },
     { time: "11:00 AM - 11:50 AM", code: "CS8591", subject: "Computer Networks", faculty: "Dr. P. Kausalya", room: "Room 269", block: "A.P.J. Abdul Kalam Block", type: "Lecture" },
     { time: "11:50 AM - 12:40 PM", code: "MA8551", subject: "Algebra & Number Theory", faculty: "Dr. G. Suresh", room: "Room 269", block: "A.P.J. Abdul Kalam Block", type: "Lecture" },
-    { time: "01:30 PM - 04:00 PM", code: "PROJ", subject: "Mini Project Work", faculty: "Dr. K. Arulmani", room: "AI Research Center", block: "A.P.J. Abdul Kalam Block", type: "Project" }
+    { time: "01:30 PM - 04:00 PM", code: "PROJ", subject: "Mini Project Work", faculty: "Dr. Kumar", room: "AI Research Center", block: "A.P.J. Abdul Kalam Block", type: "Project" }
   ],
   Wednesday: [
     { time: "09:00 AM - 09:50 AM", code: "MA8551", subject: "Algebra & Number Theory", faculty: "Dr. G. Suresh", room: "Room 269", block: "A.P.J. Abdul Kalam Block", type: "Lecture" },
@@ -202,7 +202,7 @@ export const TIMETABLE_DATA = {
   Friday: [
     { time: "09:00 AM - 09:50 AM", code: "IT8076", subject: "Software Testing", faculty: "Prof. M. Selvi", room: "Room 269", block: "A.P.J. Abdul Kalam Block", type: "Lecture" },
     { time: "09:50 AM - 10:40 AM", code: "CS8501", subject: "Theory of Computation", faculty: "Dr. S. Manikandan", room: "Room 269", block: "A.P.J. Abdul Kalam Block", type: "Lecture" },
-    { time: "11:00 AM - 12:40 PM", code: "SEMINAR", subject: "Student Technical Seminar", faculty: "Dr. K. Arulmani", room: "Seminar Hall 2", block: "A.P.J. Abdul Kalam Block", type: "Seminar" },
+    { time: "11:00 AM - 12:40 PM", code: "SEMINAR", subject: "Student Technical Seminar", faculty: "Dr. Kumar", room: "Seminar Hall 2", block: "A.P.J. Abdul Kalam Block", type: "Seminar" },
     { time: "01:30 PM - 04:00 PM", code: "CLUB", subject: "IFET Coding & AI Club Activity", faculty: "Student Leads", room: "AI Lab", block: "A.P.J. Abdul Kalam Block", type: "Club Activity" }
   ]
 };
@@ -462,7 +462,7 @@ export const DISENGAGED_STUDENTS = [
     riskLevel: "Critical",
     riskColor: "rose",
     disengagementReason: "Consecutive absences in Networks & Theory of Computation lab. Zero hackathon submissions.",
-    mentor: "Dr. K. Arulmani (Prof / CSE)",
+    mentor: "Dr. Kumar (Prof / CSE)",
     mentorEmail: "k.arulmani@ifet.ac.in",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200",
     status: "Pending Meeting"
@@ -519,7 +519,7 @@ export const DISENGAGED_STUDENTS = [
     riskLevel: "Warning",
     riskColor: "amber",
     disengagementReason: "Short of 3 hours for exam hall ticket approval. Proactive advisory meeting recommended.",
-    mentor: "Dr. K. Arulmani (Prof / CSE)",
+    mentor: "Dr. Kumar (Prof / CSE)",
     mentorEmail: "k.arulmani@ifet.ac.in",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
     status: "Completed"
@@ -550,7 +550,7 @@ export const INITIAL_MENTOR_MEETINGS = [
     regNo: "42112410622",
     section: "CSE-A",
     attendance: 73.5,
-    mentorName: "Dr. K. Arulmani (Prof / CSE)",
+    mentorName: "Dr. Kumar (Prof / CSE)",
     date: "2026-08-28",
     time: "03:00 PM",
     venue: "Staff Cabin 14 (Kalam Block AKB-02)",

@@ -12,15 +12,15 @@ function BuildingLabel({ building, isSelected, onClick, poiBadges = [] }) {
   useCursor(hovered, 'pointer', 'auto');
 
   return (
-    <Html 
-      position={[0, building.floors * 3.5 + 4, 0]} 
-      center 
-      sprite 
+    <Html
+      position={[0, building.floors * 3.5 + 4, 0]}
+      center
+      sprite
       distanceFactor={isSelected ? 30 : 45}
       zIndexRange={[100, 0]}
       occlude
     >
-      <div 
+      <div
         className={`transition-all duration-300 pointer-events-auto flex flex-col items-center cursor-pointer ${isSelected ? 'scale-125' : 'scale-100 hover:scale-110'}`}
         onClick={(e) => {
           e.stopPropagation();
@@ -49,7 +49,7 @@ function BuildingLabel({ building, isSelected, onClick, poiBadges = [] }) {
         </div>
         <div style={{ width: 1.5, height: 28, background: isSelected ? '#59624A' : 'rgba(30,30,30,0.15)' }} />
         <div style={{ width: 6, height: 6, borderRadius: '50%', background: isSelected ? '#59624A' : 'rgba(30,30,30,0.2)', boxShadow: isSelected ? '0 0 10px rgba(89, 98, 74, 0.5)' : 'none' }} />
-        
+
         {/* POI Badges */}
         {poiBadges.length > 0 && (
           <div style={{ display: 'flex', gap: '4px', position: 'absolute', top: '-30px' }}>
@@ -68,7 +68,7 @@ function BuildingLabel({ building, isSelected, onClick, poiBadges = [] }) {
 // --- Hyper-Detailed Architectural Building ---
 function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poiBadges, showLabels = true }) {
   const isMain = building.id === 'main_building';
-  
+
   const [hovered, setHovered] = useState(false);
   useCursor(hovered, 'pointer', 'auto');
 
@@ -83,7 +83,7 @@ function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poi
   const concreteMaterial = new THREE.MeshStandardMaterial({ color: '#e2e8f0', roughness: 0.9, metalness: 0.1 });
   const brickMaterial = new THREE.MeshStandardMaterial({ color: '#854d0e', roughness: 0.8, metalness: 0.1 }); // Terracotta brick
   const darkMetalMaterial = new THREE.MeshStandardMaterial({ color: '#334155', roughness: 0.5, metalness: 0.8 });
-  
+
   // Realistic Glass
   const glassMaterial = new THREE.MeshPhysicalMaterial({
     color: '#38bdf8',
@@ -101,10 +101,10 @@ function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poi
   const columnSpacing = width / columnsCount;
 
   return (
-    <group 
+    <group
       ref={buildingRef}
       name={building.blockCode}
-      position={building.position} 
+      position={building.position}
       onClick={(e) => { e.stopPropagation(); onClick(building); }}
       onPointerOver={(e) => { e.stopPropagation(); setHovered(true); }}
       onPointerOut={() => setHovered(false)}
@@ -126,7 +126,7 @@ function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poi
           <mesh position={[0, -1.6, 0]} castShadow receiveShadow material={concreteMaterial}>
             <boxGeometry args={[width + 0.2, 0.4, depth + 0.2]} />
           </mesh>
-          
+
           {/* Front Glass Pane */}
           <mesh position={[0, 0, depth / 2 + 0.1]} material={glassMaterial}>
             <boxGeometry args={[width - 1, floorHeight - 0.6, 0.1]} />
@@ -138,7 +138,7 @@ function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poi
 
           {/* Vertical Mullions (Frames) for Front */}
           {[...Array(columnsCount + 1)].map((_, c) => (
-            <mesh key={`mullion-${c}`} position={[-width/2 + c * columnSpacing, 0, depth / 2 + 0.15]} material={darkMetalMaterial} castShadow>
+            <mesh key={`mullion-${c}`} position={[-width / 2 + c * columnSpacing, 0, depth / 2 + 0.15]} material={darkMetalMaterial} castShadow>
               <boxGeometry args={[0.2, floorHeight - 0.6, 0.3]} />
             </mesh>
           ))}
@@ -150,22 +150,22 @@ function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poi
         <mesh position={[0, 0.6, 0]} castShadow receiveShadow material={concreteMaterial}>
           <boxGeometry args={[width, 1.2, depth]} />
         </mesh>
-        
+
         {/* HVAC Unit 1 */}
-        <mesh position={[-width/4, 2, 0]} castShadow material={darkMetalMaterial}>
+        <mesh position={[-width / 4, 2, 0]} castShadow material={darkMetalMaterial}>
           <boxGeometry args={[2.5, 1.8, 2.5]} />
         </mesh>
-        <mesh position={[-width/4, 2.9, 0]} castShadow material={new THREE.MeshStandardMaterial({color: '#1e293b'})}>
+        <mesh position={[-width / 4, 2.9, 0]} castShadow material={new THREE.MeshStandardMaterial({ color: '#1e293b' })}>
           <cylinderGeometry args={[0.8, 0.8, 0.2, 16]} />
         </mesh>
 
         {/* HVAC Unit 2 */}
-        <mesh position={[width/4, 1.8, depth/4]} castShadow material={darkMetalMaterial}>
+        <mesh position={[width / 4, 1.8, depth / 4]} castShadow material={darkMetalMaterial}>
           <boxGeometry args={[2, 1.4, 2]} />
         </mesh>
-        
+
         {/* Stairwell Access Housing */}
-        <mesh position={[0, 2, -depth/4]} castShadow material={concreteMaterial}>
+        <mesh position={[0, 2, -depth / 4]} castShadow material={concreteMaterial}>
           <boxGeometry args={[3, 2.5, 4]} />
         </mesh>
       </group>
@@ -193,19 +193,19 @@ function ArchitecturalBuilding({ building, isSelected, onClick, buildingRef, poi
       {isMain && (
         <group position={[0, 0, depth / 2 + 2.5]}>
           {/* Main Blue Block */}
-          <mesh position={[0, 6.5, 0]} castShadow receiveShadow material={new THREE.MeshStandardMaterial({color: '#1e3a8a', roughness: 0.3})}>
+          <mesh position={[0, 6.5, 0]} castShadow receiveShadow material={new THREE.MeshStandardMaterial({ color: '#1e3a8a', roughness: 0.3 })}>
             <boxGeometry args={[12, 13, 3]} />
           </mesh>
           {/* Curved Roof Dome */}
-          <mesh position={[0, 13, 0]} castShadow receiveShadow rotation={[-Math.PI / 2, 0, 0]} material={new THREE.MeshStandardMaterial({color: '#0f172a'})}>
+          <mesh position={[0, 13, 0]} castShadow receiveShadow rotation={[-Math.PI / 2, 0, 0]} material={new THREE.MeshStandardMaterial({ color: '#0f172a' })}>
             <cylinderGeometry args={[6, 6, 3.2, 24, 1, false, 0, Math.PI]} />
           </mesh>
           {/* Inner Cutout (Entrance Tunnel) */}
-          <mesh position={[0, 3.5, 1.5]} material={new THREE.MeshStandardMaterial({color: '#020617'})}>
+          <mesh position={[0, 3.5, 1.5]} material={new THREE.MeshStandardMaterial({ color: '#020617' })}>
             <boxGeometry args={[6, 7, 0.2]} />
           </mesh>
           {/* IFET Signboard */}
-          <mesh position={[0, 10, 1.6]} material={new THREE.MeshStandardMaterial({color: '#0ea5e9', emissive: '#0ea5e9'})}>
+          <mesh position={[0, 10, 1.6]} material={new THREE.MeshStandardMaterial({ color: '#0ea5e9', emissive: '#0ea5e9' })}>
             <boxGeometry args={[8, 1.5, 0.2]} />
           </mesh>
         </group>
@@ -230,7 +230,7 @@ function CameraRig({ selectedBuilding, activeRoute, cameraMode, buildingMap }) {
   const { camera, controls } = useThree();
   const targetCamPos = useRef(new THREE.Vector3(0, 45, 80));
   const targetLookAt = useRef(new THREE.Vector3(0, 0, 0));
-  
+
   const startCamPos = useRef(new THREE.Vector3());
   const startLookAt = useRef(new THREE.Vector3());
   const animProgress = useRef(1);
@@ -238,7 +238,7 @@ function CameraRig({ selectedBuilding, activeRoute, cameraMode, buildingMap }) {
 
   useEffect(() => {
     if (!controls) return;
-    
+
     startCamPos.current.copy(camera.position);
     startLookAt.current.copy(controls.target);
     animProgress.current = 0;
@@ -266,15 +266,15 @@ function CameraRig({ selectedBuilding, activeRoute, cameraMode, buildingMap }) {
       // Find the actual building mesh using its explicit ref
       if (ref && ref.current) {
         const mesh = ref.current;
-        
+
         // Critical Fix: Force world matrix update before calculating bounding box
         mesh.updateMatrixWorld(true);
-        
+
         // Compute its bounding box
         const box = new THREE.Box3().setFromObject(mesh);
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
-        
+
         const worldPos = new THREE.Vector3();
         mesh.getWorldPosition(worldPos);
 
@@ -287,7 +287,7 @@ function CameraRig({ selectedBuilding, activeRoute, cameraMode, buildingMap }) {
         );
 
         const destination = center.clone().add(cameraOffset);
-        
+
         targetLookAt.current.copy(center);
         targetCamPos.current.copy(destination);
 
@@ -355,8 +355,8 @@ function CameraRig({ selectedBuilding, activeRoute, cameraMode, buildingMap }) {
   });
 
   return (
-    <OrbitControls 
-      makeDefault 
+    <OrbitControls
+      makeDefault
       enableDamping={true}
       dampingFactor={0.08}
       enablePan={true}
@@ -427,7 +427,7 @@ function RouteBeam({ activeRoute, isEmergency }) {
   if (!activeRoute) return null;
 
   const targetBuilding = BUILDINGS_DATA.find(b => b.id === activeRoute.buildingId) || BUILDINGS_DATA[1];
-  const startPoint = new THREE.Vector3(0, 0.4, 45); 
+  const startPoint = new THREE.Vector3(0, 0.4, 45);
   const fountainPoint = new THREE.Vector3(0, 0.4, 15);
   const destPoint = new THREE.Vector3(targetBuilding.position[0], 0.4, targetBuilding.position[2]);
 
@@ -435,12 +435,12 @@ function RouteBeam({ activeRoute, isEmergency }) {
 
   return (
     <Tube args={[curve, 64, 0.35, 8, false]}>
-      <meshStandardMaterial 
-        color={isEmergency ? "#ef4444" : "#06b6d4"} 
-        emissive={isEmergency ? "#ef4444" : "#06b6d4"} 
-        emissiveIntensity={isEmergency ? 2 : 1.5} 
-        transparent 
-        opacity={0.8} 
+      <meshStandardMaterial
+        color={isEmergency ? "#ef4444" : "#06b6d4"}
+        emissive={isEmergency ? "#ef4444" : "#06b6d4"}
+        emissiveIntensity={isEmergency ? 2 : 1.5}
+        transparent
+        opacity={0.8}
       />
     </Tube>
   );
@@ -452,18 +452,18 @@ function EnvironmentSetup({ visibilitySettings }) {
     <>
       <color attach="background" args={['#87CEEB']} />
       <fog attach="fog" args={['#87CEEB', 50, 250]} />
-      
+
       <ambientLight intensity={0.5} />
-      <directionalLight 
-        castShadow 
-        position={[60, 120, 50]} 
-        intensity={1.8} 
-        shadow-mapSize={[4096, 4096]} 
-        shadow-camera-far={250} 
-        shadow-camera-left={-80} 
-        shadow-camera-right={80} 
-        shadow-camera-top={80} 
-        shadow-camera-bottom={-80} 
+      <directionalLight
+        castShadow
+        position={[60, 120, 50]}
+        intensity={1.8}
+        shadow-mapSize={[4096, 4096]}
+        shadow-camera-far={250}
+        shadow-camera-left={-80}
+        shadow-camera-right={80}
+        shadow-camera-top={80}
+        shadow-camera-bottom={-80}
         shadow-bias={-0.0005}
       />
       <directionalLight position={[-40, 30, -20]} intensity={0.6} color="#e0f2fe" />
@@ -553,7 +553,7 @@ function EnvironmentSetup({ visibilitySettings }) {
               <Instance key={`t3-${i}`} position={[x, 1.5, -2]} scale={[1, 1.5, 1]} />
             ))}
           </Instances>
-          
+
           {/* Tree Trunks */}
           <Instances range={40} material={new THREE.MeshStandardMaterial({ color: '#451a03' })} geometry={new THREE.CylinderGeometry(0.2, 0.3, 2)}>
             {[-40, -30, -20, -10, 10, 20, 30, 40].map((x, i) => (
@@ -619,7 +619,7 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
 
   // Bottom Floating Controls State
   const [activeBottomPanel, setActiveBottomPanel] = useState(null);
-  
+
   // Show info panel when a building is selected
   useEffect(() => {
     if (selectedBuilding) {
@@ -648,7 +648,7 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [toggleDigitalTwin, digitalTwin.isFull3DMode]);
-  
+
   // --- Force R3F to re-measure Canvas after mount & mode changes ---
   // R3F measures the Canvas on first render. If the container was tab-switched 
   // into existence (previously un-rendered), WebGL may record 0×0 dimensions.
@@ -723,13 +723,13 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
   const startTour = (tourName) => {
     setActivePanel(null); // Close panel
     let buildingsToTour = BUILDINGS_DATA;
-    
+
     if (tourName === 'Freshers Tour') {
       buildingsToTour = BUILDINGS_DATA.filter(b => ['main_building', 'kalam_block', 'hostel'].includes(b.id));
     } else if (tourName === 'Academic Tour') {
       buildingsToTour = BUILDINGS_DATA.filter(b => ['kalam_block', 'visvesvaraya_block', 'library'].includes(b.id));
     }
-    
+
     let i = 0;
     const playNext = () => {
       if (i < buildingsToTour.length) {
@@ -780,10 +780,10 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
             }
 
             return (
-              <ArchitecturalBuilding 
-                key={b.id} 
-                building={b} 
-                isSelected={selectedBuilding?.id === b.id} 
+              <ArchitecturalBuilding
+                key={b.id}
+                building={b}
+                isSelected={selectedBuilding?.id === b.id}
                 onClick={onSelectBuilding}
                 buildingRef={buildingMap[b.blockCode]}
                 poiBadges={badges}
@@ -797,10 +797,10 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
       </div>
 
       {/* ---------------- DIGITAL TWIN UI OVERLAYS ---------------- */}
-      
+
       {/* Navigation Status Bar (Hidden by default, shown via CameraRig) */}
-      <div 
-        id="nav-status-bar" 
+      <div
+        id="nav-status-bar"
         className="absolute top-4 left-1/2 -translate-x-1/2 z-40 glass-editorial rounded-full px-6 py-3 shadow-editorial flex flex-col items-center transition-opacity duration-300 pointer-events-none"
         style={{ opacity: 0 }}
       >
@@ -830,7 +830,7 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
               <X className="w-5 h-5" />
             </button>
           </div>
-          
+
           {/* List of Locations */}
           <div className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
             {/* Search Box */}
@@ -898,11 +898,11 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
             {['Library', 'Cafeteria', 'Labs', 'Hostel', 'Parking', 'Auditorium'].map(cat => (
               <label key={cat} className="flex items-center justify-between group cursor-pointer p-2 rounded-xl hover:bg-[var(--bg-secondary)] transition-colors border border-transparent hover:border-[var(--border-color)]">
                 <span className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider group-hover:text-[var(--olive-primary)] transition-colors">{cat}</span>
-                <input 
-                  type="checkbox" 
-                  className="w-4 h-4 rounded text-[var(--olive-primary)] focus:ring-[var(--olive-primary)] border-[var(--border-color)]" 
-                  checked={poiFilters[cat]} 
-                  onChange={() => setPoiFilters({...poiFilters, [cat]: !poiFilters[cat]})} 
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 rounded text-[var(--olive-primary)] focus:ring-[var(--olive-primary)] border-[var(--border-color)]"
+                  checked={poiFilters[cat]}
+                  onChange={() => setPoiFilters({ ...poiFilters, [cat]: !poiFilters[cat] })}
                 />
               </label>
             ))}
@@ -934,7 +934,7 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
                 {BUILDINGS_DATA.map(b => <option key={`to-${b.id}`} value={b.id}>{b.name}</option>)}
               </select>
             </div>
-            <button 
+            <button
               disabled={!routeEnd}
               onClick={() => {
                 if (routeEnd) {
@@ -1040,7 +1040,7 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
 
       {/* Bottom Floating Controls */}
       <div className="absolute bottom-[5rem] md:bottom-6 right-6 z-20 flex flex-col md:flex-row items-end md:items-center space-y-3 md:space-y-0 md:space-x-3">
-        
+
         {/* Layer Visibility Panel */}
         {activeBottomPanel === 'layers' && (
           <div className="absolute bottom-full right-0 mb-4 md:mb-16 w-64 premium-card glow-effect rounded-2xl overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300 border border-[var(--border-color)]">
@@ -1053,22 +1053,22 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
             </div>
             <div className="p-4 space-y-3">
               {[
-                { key: 'showLabels',      label: 'Labels' },
-                { key: 'showHeatmap',     label: 'Heatmap' },
-                { key: 'showRoads',       label: 'Roads' },
-                { key: 'showTrees',       label: 'Trees' },
-                { key: 'showPOIs',        label: 'POIs' },
+                { key: 'showLabels', label: 'Labels' },
+                { key: 'showHeatmap', label: 'Heatmap' },
+                { key: 'showRoads', label: 'Roads' },
+                { key: 'showTrees', label: 'Trees' },
+                { key: 'showPOIs', label: 'POIs' },
                 { key: 'showDecorations', label: 'Decorations' },
               ].map(({ key, label }) => (
                 <label key={key} className="flex items-center justify-between group cursor-pointer p-2 rounded-xl hover:bg-[var(--bg-secondary)] transition-colors border border-transparent hover:border-[var(--border-color)]">
                   <span className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider group-hover:text-[var(--olive-primary)] transition-colors">
                     {label}
                   </span>
-                  <input 
-                    type="checkbox" 
-                    className="w-4 h-4 rounded text-[var(--olive-primary)] focus:ring-[var(--olive-primary)] border-[var(--border-color)]" 
-                    checked={digitalTwin[key]} 
-                    onChange={() => toggleDigitalTwin(key)} 
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 rounded text-[var(--olive-primary)] focus:ring-[var(--olive-primary)] border-[var(--border-color)]"
+                    checked={digitalTwin[key]}
+                    onChange={() => toggleDigitalTwin(key)}
                   />
                 </label>
               ))}
@@ -1092,19 +1092,21 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
                 { label: 'Find Library', action: () => onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'central_library')) },
                 { label: 'Find Hostel', action: () => onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'hostels')) },
                 { label: "Show Today's Classes", action: () => onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'kalam_block')) }, // Demo target
-                { label: 'Navigate to Cafeteria', action: () => {
-                  onClearRoute();
-                  setTimeout(() => {
-                    document.getElementById('nav-status-bar').style.opacity = '1';
-                    document.getElementById('nav-progress-fill').style.width = '100%';
-                    document.getElementById('nav-status-bar').querySelector('span').innerText = 'Navigating Route...';
-                    onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'cafeteria'));
-                  }, 100);
-                }},
+                {
+                  label: 'Navigate to Cafeteria', action: () => {
+                    onClearRoute();
+                    setTimeout(() => {
+                      document.getElementById('nav-status-bar').style.opacity = '1';
+                      document.getElementById('nav-progress-fill').style.width = '100%';
+                      document.getElementById('nav-status-bar').querySelector('span').innerText = 'Navigating Route...';
+                      onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'cafeteria'));
+                    }, 100);
+                  }
+                },
                 { label: 'Show Nearest Lab', action: () => onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'main_building')) }, // Demo target
                 { label: 'Emergency Help', action: () => onSelectBuilding(BUILDINGS_DATA.find(b => b.id === 'main_building')) } // Demo target
               ].map((item, idx) => (
-                <button 
+                <button
                   key={idx}
                   onClick={() => { item.action(); setActiveBottomPanel(null); }}
                   className="w-full text-left px-4 py-3 hover:bg-[var(--bg-secondary)] rounded-xl text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider transition-colors hover:text-[var(--olive-primary)]"
@@ -1117,21 +1119,21 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
         )}
 
         {/* The 3 Floating Action Buttons */}
-        <button 
+        <button
           onClick={() => setActiveBottomPanel(activeBottomPanel === 'layers' ? null : 'layers')}
           className="p-4 glass-editorial hover:bg-[var(--olive-primary)] hover:text-[#FFFFFF] text-[var(--olive-primary)] transition-all rounded-full shadow-editorial group hover:-translate-y-0.5 focus:scale-95 duration-200"
         >
           <Layers className="w-6 h-6" />
         </button>
-        
-        <button 
+
+        <button
           onClick={() => setActiveBottomPanel(activeBottomPanel === 'ai' ? null : 'ai')}
           className="p-4 glass-editorial hover:bg-[var(--olive-primary)] hover:text-[#FFFFFF] text-[var(--olive-primary)] transition-all rounded-full shadow-editorial group hover:-translate-y-0.5 focus:scale-95 duration-200"
         >
           <Sparkles className="w-6 h-6" />
         </button>
-        
-        <button 
+
+        <button
           onClick={() => {
             handleResetCamera();
             setActiveBottomPanel(null);
@@ -1160,10 +1162,10 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
               <h3 className="text-xl font-bold text-[var(--text-primary)] uppercase tracking-wider leading-tight">{selectedBuilding.name}</h3>
             </div>
           </div>
-          
+
           <div className="p-6 flex-1 overflow-y-auto custom-scrollbar flex flex-col">
             <p className="mb-6 text-[var(--text-secondary)] text-sm leading-relaxed">{selectedBuilding.description}</p>
-            
+
             <div className="mb-6">
               <h4 className="text-[var(--olive-primary)] text-xs font-bold uppercase tracking-widest mb-3 flex items-center"><MapPin className="w-4 h-4 mr-2" /> Key Locations</h4>
               <ul className="space-y-2">
@@ -1174,7 +1176,7 @@ export default function Campus3D({ selectedBuilding, onSelectBuilding, activeRou
             </div>
 
             <div className="mt-auto pt-4 space-y-3">
-              <button 
+              <button
                 onClick={() => onAskAI && onAskAI(selectedBuilding)}
                 className="w-full flex items-center justify-center space-x-2 bg-[var(--olive-primary)] border-none text-white px-4 py-3 rounded-xl hover:bg-[var(--olive-hover)] hover:-translate-y-0.5 transition-all font-bold text-xs uppercase tracking-wider shadow-editorial group"
               >
