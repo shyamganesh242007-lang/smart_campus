@@ -1,4 +1,4 @@
-# Logs
+# Logs and debug files
 logs
 *.log
 npm-debug.log*
@@ -6,27 +6,67 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+build_err.txt
+err_debug.txt
 
-node_modules
-dist
-dist-ssr
-*.local
+# Node & Build artifacts
+node_modules/
+dist/
+dist-ssr/
+build/
+.vite/
+
+# Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.pyc
+
+# ChromaDB persistence & SQLite databases
+.chroma_db/
+backend/.chroma_db/
+**/.chroma_db/
+backend/.test_chroma/
+.test_chroma/
+*.sqlite3
+*.sqlite3-journal
+
+# Uploads, generated documents & scratch test files
+uploads/
+backend/uploads/
+backend/backend/
+scratch/
+DBMS-V MODULE.docx
+DBMS_TEST.docx
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*
+!.env.example
+!**/.env.example
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-.env
-.env.local
-.env.*
-!.env.example
-node_modules
-dist
-build
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini

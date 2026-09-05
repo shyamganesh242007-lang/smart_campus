@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "py -3.13 -m uvicorn main:app --reload --port 8000 --app-dir backend",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,10 +14,15 @@
     "@react-three/fiber": "^8.18.0",
     "axios": "^1.20.0",
     "canvas-confetti": "^1.9.2",
+    "katex": "^0.18.5",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^10.1.0",
     "recharts": "^3.10.1",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
     "three": "^0.162.0"
   },
   "devDependencies": {

@@ -281,3 +281,119 @@
   background: linear-gradient(180deg, #7e8e6b 0%, #515e42 100%);
 }
 
+/* KaTeX Mathematical & Scientific Formula Styling */
+.katex {
+  font-size: 1.05em !important;
+  color: inherit !important;
+  line-height: 1.2 !important;
+}
+
+.katex-display {
+  margin: 0.75rem 0 !important;
+  padding: 0.5rem 0.25rem !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  text-align: center !important;
+}
+
+.katex-display > .katex {
+  white-space: normal !important;
+  text-align: center !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(76, 88, 62, 0.35);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 88, 62, 0.6);
+}
+
+/* Markdown Table Styling (ChatGPT Grade) */
+.markdown-table-wrapper {
+  margin: 0.85rem 0;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow: 0 2px 8px rgba(10, 22, 14, 0.05);
+}
+
+.markdown-table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse !important;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.markdown-table thead {
+  background: var(--olive-primary);
+  color: #FFFFFF;
+}
+
+.markdown-table thead th {
+  padding: 0.65rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+.markdown-table thead th:first-child {
+  border-top-left-radius: 0.65rem;
+}
+
+.markdown-table thead th:last-child {
+  border-top-right-radius: 0.65rem;
+}
+
+.markdown-table tbody tr {
+  transition: background-color 150ms ease;
+}
+
+.markdown-table tbody tr:nth-child(even) {
+  background: rgba(245, 243, 235, 0.65);
+}
+
+.markdown-table tbody tr:hover {
+  background: rgba(76, 88, 62, 0.09);
+}
+
+.markdown-table tbody td {
+  padding: 0.6rem 0.9rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+  font-size: 0.75rem;
+}
+
+.markdown-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Task list items */
+.contains-task-list {
+  list-style: none !important;
+  padding-left: 0.25rem !important;
+}
+
+.task-list-item {
+  list-style-type: none !important;
+  display: flex;
+  align-items: center;
+  margin: 0.25rem 0;
+}
+

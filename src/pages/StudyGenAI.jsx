@@ -9,7 +9,7 @@ export default function StudyGenAI() {
 
   const handleUploadComplete = async (file) => {
     try {
-      const response = await studygenApi.uploadPdf(file);
+      const response = await studygenApi.uploadFile(file);
       if (response && response.success === false) {
         return { success: false, error: response.error };
       }
